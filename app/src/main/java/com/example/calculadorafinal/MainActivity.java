@@ -11,12 +11,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
+
 import org.mozilla.javascript.Scriptable;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView Operacaoview, Resultadosview;
+    TextView Operacaoview, Resultadosview, Operrador;
     MaterialButton buttonAC, buttonVirgula;
     MaterialButton buttonDividir, buttonX, buttonMenos, buttonMais, buttonIgual, buttonfx;
     MaterialButton button0,button1,button2,button3,button4,button5,button6,button7,button8,button9;
@@ -30,52 +31,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Operacaoview = findViewById(R.id.Operacao);
         Resultadosview = findViewById(R.id.ResultadoHistorico);
+        Operrador = findViewById(R.id.Operrador);
 
-        assignId(buttonAC, R.id.button_AC);
-        assignId(buttonVirgula, R.id.button_Virgula);
-        assignId(button0, R.id.button_0);
-        assignId(button1, R.id.button_1);
-        assignId(button2, R.id.button_2);
-        assignId(button3, R.id.button_3);
-        assignId(button4, R.id.button_4);
-        assignId(button5, R.id.button_5);
-        assignId(button6, R.id.button_6);
-        assignId(button7, R.id.button_7);
-        assignId(button8, R.id.button_8);
-        assignId(button9, R.id.button_9);
-        assignId(buttonMais, R.id.button_Mais);
-        assignId(buttonMenos, R.id.button_Menos);
-        assignId(buttonIgual, R.id.button_Igual);
-        assignId(buttonX, R.id.button_X);
-        assignId(buttonDividir, R.id.button_Dividir);
-        assignId(buttonfx, R.id.button_FX);
+        assignId(R.id.button_AC);
+        assignId(R.id.button_Virgula);
+        assignId(R.id.button_0);
+        assignId(R.id.button_1);
+        assignId(R.id.button_2);
+        assignId(R.id.button_3);
+        assignId(R.id.button_4);
+        assignId(R.id.button_5);
+        assignId(R.id.button_6);
+        assignId(R.id.button_7);
+        assignId(R.id.button_8);
+        assignId(R.id.button_9);
+        assignId(R.id.button_Mais);
+        assignId(R.id.button_Menos);
+        assignId(R.id.button_Igual);
+        assignId(R.id.button_X);
+        assignId(R.id.button_Dividir);
+        assignId(R.id.button_FX);
     }
 
 
-
-    void assignId(MaterialButton btn, int id){
-        btn = findViewById(id);
+    void assignId(int id){
+        MaterialButton btn = findViewById(id);
         btn.setOnClickListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
     MaterialButton button = (MaterialButton) v;
     String buttonText = button.getText().toString();
+
 //    ResultadoHistoricoview.setText(buttonText);
     String PorCalcular = Operacaoview.getText().toString();
+
+    if (buttonText.equals("+")){
+            int a = Integer.parseInt(Operacaoview.getText().toString());
+            Resultadosview.setText(String.valueOf(a));
+            Operrador.setText(buttonText);
+            Operacaoview.setText(String.valueOf(0));
+            return;
+    }
+
+    if (buttonText.equals("-")){
+            Operrador.setText(buttonText);
+            int a = Integer.parseInt(Operacaoview.getText().toString());
+            Resultadosview.setText(String.valueOf(a));
+            Operacaoview.setText(String.valueOf(0));
+            return;
+    }
+
     if (buttonText.equals("AC")){
         Operacaoview.setText("");
         Resultadosview.setText("0");
+        Operrador.setText("");
         return;
     }
 
+
     if (buttonText.equals("=")){
-        Resultadosview.setText(Operacaoview.getText());
-        return;
-    }else {
-        PorCalcular = PorCalcular + buttonText; //concatenar os valores na view de operacoes
+        int a = Integer.parseInt(Resultadosview.getText().toString());
+        int b = Integer.parseInt(Operacaoview.getText().toString());
+
+            int res1 = a + b;
+            Resultadosview.setText(String.valueOf(res1));
+            Operacaoview.setText("");
+            return;
     }
+
+        Operacaoview.setText("nao calculou");
+        PorCalcular = PorCalcular + buttonText;//concatenar os valores na view de operacoes
         Operacaoview.setText(PorCalcular); //apresentar os valores por ser calculados na textview de operacoes
 
     String Resultadofinal = getResult(PorCalcular) ;
