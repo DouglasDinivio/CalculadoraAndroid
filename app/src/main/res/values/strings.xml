@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">CalculadoraFinal</string>
+    <string name="_0">0</string>
+    <string name="fx">fx</string>
+    <string name="Percentagem">%</string>
+    <string name="ac">AC</string>
+    <string name="dividir">/</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_5">5</string>
+    <string name="x">X</string>
+    <string name="_4">4</string>
+    <string name="_6">6</string>
+    <string name="ponto">-</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="mais">+</string>
+    <string name="zero">0</string>
+    <string name="virgula">,</string>
+    <string name="igual">=</string>
+    <string name="resultado">Resultado :</string>
 </resources>
